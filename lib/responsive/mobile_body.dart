@@ -19,6 +19,8 @@ class _MobileScaffoldState extends State<MobileScaffold> {
   ];
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height -
+        (MediaQuery.of(context).size.height * 0.22);
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
       appBar: Header(
@@ -33,6 +35,8 @@ class _MobileScaffoldState extends State<MobileScaffold> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Presentation(
+                  heightScreen: heightScreen *
+                      2, //Para duplicar la pantalla verticalmente
                   context: context,
                   itemRowOrColumn: const Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

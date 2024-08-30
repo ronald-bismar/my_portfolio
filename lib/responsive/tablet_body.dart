@@ -18,6 +18,8 @@ class _TabletScaffoldState extends State<TabletScaffold> {
   List<Widget> itemsHeader = [const ItemLogo(), const ButtonContact()];
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height -
+        (MediaQuery.of(context).size.height / 3);
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
       appBar: Header(
@@ -32,6 +34,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Presentation(
+                  heightScreen: heightScreen * 2,
                   context: context,
                   itemRowOrColumn: const Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

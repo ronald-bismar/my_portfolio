@@ -22,8 +22,11 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
     const Navbar(),
     const ButtonContact()
   ];
+
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height -
+        (MediaQuery.of(context).size.height * 0.22);
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
       appBar: Header(
@@ -37,6 +40,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Presentation(
+                  heightScreen: heightScreen,
                   context: context,
                   itemRowOrColumn: const Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
