@@ -19,7 +19,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
   @override
   Widget build(BuildContext context) {
     double heightScreen = MediaQuery.of(context).size.height -
-        (MediaQuery.of(context).size.height / 3);
+        (MediaQuery.of(context).size.height / 10);
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
       appBar: Header(
