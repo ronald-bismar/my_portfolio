@@ -3,14 +3,14 @@ import 'package:my_portfolio/constants.dart';
 
 class AspectIphone {
   //Se suma 14 a los radius
-  Color colorPhone = const Color(0xFF2E353F);
+  Color colorPhone = const Color.fromARGB(255, 49, 60, 75);
   Widget secondLayerLight() {
     Color colorSombra = Colors.white;
     List<BoxShadow> shadowsSecondLayer = List.generate(
         12,
         (index) => BoxShadow(
               color: colorSombra,
-              blurRadius: 2.1,
+              blurRadius: 2.6,
             ));
 
     return Container(
@@ -97,7 +97,7 @@ class AspectIphone {
             fit: StackFit.passthrough,
             children: [
               Image.asset(
-                "assets/images/wallpaper.jpg",
+                "assets/images/iphone.jpg",
                 fit: BoxFit.cover,
               ),
               Align(alignment: Alignment.topCenter, child: camera())
