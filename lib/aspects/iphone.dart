@@ -14,8 +14,8 @@ class AspectIphone {
             ));
 
     return Container(
-      width: double.infinity, // Un poco más pequeña que la primera capa
-      height: double.infinity, // Un poco más baja que la primera capa
+      width: double.infinity,
+      height: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
           color: colorSombra,
