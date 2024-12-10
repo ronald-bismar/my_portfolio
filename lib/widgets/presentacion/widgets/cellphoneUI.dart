@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:my_portfolio/aspects/osandroid.dart';
 import 'package:my_portfolio/constants.dart';
 
 class CellPhoneUI extends StatefulWidget {
@@ -11,8 +12,25 @@ class CellPhoneUI extends StatefulWidget {
 }
 
 class CellphoneUIState extends State<CellPhoneUI> {
-  Color colorPhone = const Color.fromARGB(255, 41, 41, 41);
-  bool isIphone = false;
+  static const _durationAnimation = Duration(milliseconds: 200);
+  static const _iphoneColor = Color.fromARGB(255, 49, 60, 75);
+  static const _samsungColor = Color.fromARGB(255, 41, 41, 41);
+
+  static final _outlineShadows = [
+    BoxShadow(
+      color: Colors.red.withOpacity(0.5),
+      offset: const Offset(5, 5),
+      blurRadius: 10,
+    ),
+    BoxShadow(
+      color: Colors.blue.withOpacity(0.5),
+      offset: const Offset(-5, -5),
+      blurRadius: 10,
+    ),
+  ];
+
+  late Color _colorPhone;
+  bool _isIphone = false;
 
   @override
   void initState() {
@@ -21,39 +39,23 @@ class CellphoneUIState extends State<CellPhoneUI> {
 
   @override
   Widget build(BuildContext context) {
-    colorPhone = isIphone
-        ? const Color.fromARGB(255, 49, 60, 75)
-        : const Color.fromARGB(255, 41, 41, 41);
+    _colorPhone = _isIphone ? _iphoneColor : _samsungColor;
     return firstLayerDark();
   }
 
   Widget firstLayerDark() {
-    List<BoxShadow> outlineShadows = [
-      BoxShadow(
-        color: Colors.red.withOpacity(0.5),
-        offset: const Offset(5, 5),
-        blurRadius: 10,
-      ),
-      BoxShadow(
-        color: Colors.blue.withOpacity(0.5),
-        offset: const Offset(-5, -5),
-        blurRadius: 10,
-      ),
-    ];
-
-    // Usamos un `Center` para centrar el contenedor en la pantalla
     return GestureDetector(
-      onTap: () => setState(() => isIphone = !isIphone),
+      onTap: () => setState(() => _isIphone = !_isIphone),
       child: Center(
         child: AnimatedContainer(
-            padding: EdgeInsets.all(isIphone ? 4 : 5),
-            duration: const Duration(milliseconds: 300),
-            width: isIphone ? 265 : 260,
-            height: isIphone ? 535 : 550,
+            padding: EdgeInsets.all(_isIphone ? 4 : 5),
+            duration: _durationAnimation,
+            width: _isIphone ? 265 : 260,
+            height: _isIphone ? 535 : 550,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(isIphone ? 44 : 28),
-              color: colorPhone,
-              boxShadow: outlineShadows,
+              borderRadius: BorderRadius.circular(_isIphone ? 44 : 28),
+              color: _colorPhone,
+              boxShadow: _outlineShadows,
             ),
             child: secondLayerLight()),
       ),
@@ -64,7 +66,7 @@ class CellphoneUIState extends State<CellPhoneUI> {
     Color colorSombra = Colors.white;
     BorderRadius radius1Samsung = BorderRadius.circular(22);
     BorderRadius radius1Iphone = BorderRadius.circular(40);
-    final double blurRadius = isIphone ? 2.6 : 2;
+    final double blurRadius = _isIphone ? 2.6 : 2;
 
     List<BoxShadow> shadowsSecondLayer = List.generate(
         12,
@@ -74,11 +76,11 @@ class CellphoneUIState extends State<CellPhoneUI> {
             ));
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
+      duration: _durationAnimation,
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-          borderRadius: isIphone ? radius1Iphone : radius1Samsung,
+          borderRadius: _isIphone ? radius1Iphone : radius1Samsung,
           color: colorSombra,
           boxShadow: shadowsSecondLayer),
       child: thirdLayerLight(),
@@ -88,22 +90,22 @@ class CellphoneUIState extends State<CellPhoneUI> {
   Widget thirdLayerLight() {
     List<BoxShadow> shadowsSecondLayer = [
       BoxShadow(
-        color: colorPhone,
+        color: _colorPhone,
         offset: const Offset(2, 2),
         blurRadius: 1,
       ),
       BoxShadow(
-        color: colorPhone,
+        color: _colorPhone,
         offset: const Offset(-2, -2),
         blurRadius: 1,
       ),
       BoxShadow(
-        color: colorPhone,
+        color: _colorPhone,
         offset: const Offset(-2, 2),
         blurRadius: 1,
       ),
       BoxShadow(
-        color: colorPhone,
+        color: _colorPhone,
         offset: const Offset(2, -2),
         blurRadius: 1,
       ),
@@ -113,12 +115,12 @@ class CellphoneUIState extends State<CellPhoneUI> {
     BorderRadius radius1Iphone = BorderRadius.circular(40);
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
+      duration: _durationAnimation,
       padding: const EdgeInsets.all(1),
       width: double.infinity, // Un poco más pequeña que la primera capa
       height: double.infinity, // Un poco más baja que la primera capa
       decoration: BoxDecoration(
-          borderRadius: isIphone ? radius1Iphone : radius1Samsung,
+          borderRadius: _isIphone ? radius1Iphone : radius1Samsung,
           color: appBarColor,
           boxShadow: shadowsSecondLayer),
       child: quarterLayer(),
@@ -130,7 +132,7 @@ class CellphoneUIState extends State<CellPhoneUI> {
     Radius borderRadiusTop = const Radius.circular(18);
     Radius borderRadiusBottom = const Radius.circular(22);
 
-    BorderRadius allBorderRadius = isIphone
+    BorderRadius allBorderRadius = _isIphone
         ? const BorderRadius.all(Radius.circular(38))
         : BorderRadius.only(
             topLeft: borderRadiusTop,
@@ -138,10 +140,10 @@ class CellphoneUIState extends State<CellPhoneUI> {
             bottomLeft: borderRadiusBottom,
             bottomRight: borderRadiusBottom);
 
-    double paddingBottom = isIphone ? 1 : 13;
+    double paddingBottom = _isIphone ? 1 : 13;
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
+      duration: _durationAnimation,
       padding: EdgeInsets.only(bottom: paddingBottom),
       width: double.infinity,
       height: double.infinity,
@@ -158,7 +160,7 @@ class CellphoneUIState extends State<CellPhoneUI> {
     Radius borderRadiusTop = const Radius.circular(18);
     Radius borderRadiusBottom = const Radius.circular(22);
 
-    BorderRadius allBorderRadius = isIphone
+    BorderRadius allBorderRadius = _isIphone
         ? const BorderRadius.all(
             Radius.circular(36),
           )
@@ -170,8 +172,8 @@ class CellphoneUIState extends State<CellPhoneUI> {
           );
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      padding: const EdgeInsets.all(1),
+      duration: _durationAnimation,
+      padding: EdgeInsets.all(_isIphone ? 2 : 1.2),
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
@@ -193,30 +195,31 @@ class CellphoneUIState extends State<CellPhoneUI> {
                   secondChild: SizedBox.expand(
                       child: Image.asset("assets/images/wallpaper.jpg",
                           fit: BoxFit.cover)),
-                  crossFadeState: isIphone
+                  crossFadeState: _isIphone
                       ? CrossFadeState.showFirst
                       : CrossFadeState.showSecond,
-                  duration: const Duration(milliseconds: 300)),
-              Align(alignment: Alignment.topCenter, child: camera())
+                  duration: _durationAnimation),
+              Align(alignment: Alignment.topCenter, child: camera()),
+              const ScreenMainAndroid()
             ],
           )),
     );
   }
 
   Widget camera() {
-    BorderRadius borderRadius = isIphone
+    BorderRadius borderRadius = _isIphone
         ? const BorderRadius.all(Radius.circular(10))
         : const BorderRadius.only(bottomRight: Radius.circular(10));
 
     return Transform(
-      transform: Matrix4.identity()..rotateZ(isIphone ? 0 : (pi / 4)),
+      transform: Matrix4.identity()..rotateZ(_isIphone ? 0 : (pi / 4)),
       origin: Offset.fromDirection(-0.3, 20),
       alignment: Alignment.center,
       child: AnimatedContainer(
-          margin: EdgeInsets.all(isIphone ? 6 : 0),
-          duration: const Duration(milliseconds: 300),
-          width: isIphone ? 70 : 28,
-          height: isIphone ? 20 : 28,
+          margin: EdgeInsets.all(_isIphone ? 6 : 0),
+          duration: _durationAnimation,
+          width: _isIphone ? 70 : 28,
+          height: _isIphone ? 20 : 28,
           decoration:
               BoxDecoration(color: Colors.black, borderRadius: borderRadius)),
     );

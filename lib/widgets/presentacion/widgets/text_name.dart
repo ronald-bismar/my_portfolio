@@ -16,6 +16,7 @@ class TextName extends StatelessWidget {
     )));
   }
 
+
   firstText() {
     return const FittedBox(
       fit: BoxFit.contain,
