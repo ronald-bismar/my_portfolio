@@ -18,49 +18,97 @@ class _ScreenMainAndroidState extends State<ScreenMainAndroid> {
   }
 
   Widget toolBar() {
-    return Flexible(
-      flex: 2,
-      child: Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          width: double.infinity,
-          color: Colors.red,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              hourOfPhone(),
-              Expanded(child: Container()),
-              ...statePhone()
-            ],
-          )),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 1),
+      width: double.infinity,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          hourOfPhone(),
+          Row(
+            children: statePhone(),
+          ),
+        ],
+      ),
     );
   }
 
   Widget mainScreen() {
-    return Flexible(
-      flex: 40,
-      child: Container(
-          width: double.infinity, color: Colors.green.withOpacity(0.5)),
+    return Expanded(
+      child: SizedBox(
+        width: double.infinity,
+        child: GridView.builder(
+          padding: const EdgeInsets.all(8.0),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4, // Número de columnas
+            mainAxisSpacing: 30.0, // Espacio vertical entre las grillas
+            crossAxisSpacing: 20.0, // Espacio horizontal entre las grillas
+            mainAxisExtent: 80, // Altura de cada celda
+          ),
+          itemCount: 10, // Número de elementos en la grilla
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    height: 50, // Ajusta la altura según sea necesario
+                    width: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: Colors.blueAccent,
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      'Item $index',
+                      style: const TextStyle(color: Colors.black, fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 
   Widget bottomNavigator() {
-    return Flexible(
-      flex: 2,
-      child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 5),
-          width: double.infinity,
-          color: Colors.blue),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      width: double.infinity,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Transform.rotate(
+            angle: 4.705,
+            child: Transform.scale(
+              scaleY: 1.3,
+              child: const Icon(Icons.menu, size: 17, color: Colors.white60),
+            ),
+          ),
+          const Icon(Icons.crop_square_rounded,
+              size: 17, color: Colors.white60),
+          const Icon(Icons.arrow_back_ios, size: 17, color: Colors.white60),
+        ],
+      ),
     );
   }
 
-  hourOfPhone() {
+  Widget hourOfPhone() {
     DateTime now = DateTime.now();
     String hour = now.hour.toString().padLeft(2, '0');
     String minutes = now.minute.toString().padLeft(2, '0');
-    return Text(
-      '$hour : $minutes',
-      style: const TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
+    return Container(
+      padding: const EdgeInsets.only(top: 2),
+      child: Text(
+        '$hour : $minutes',
+        style: const TextStyle(
+            fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white60),
+      ),
     );
   }
 
@@ -73,17 +121,25 @@ class _ScreenMainAndroidState extends State<ScreenMainAndroid> {
   }
 
   Widget battery() {
-    return const Icon(Icons.battery_4_bar_sharp, size: 11);
+    return Transform.scale(
+        scaleX: 1.4,
+        child: const Icon(Icons.battery_4_bar_sharp,
+            size: 10, color: Colors.white60));
   }
 
   Widget percentBattery() {
-    return const Text(
-      '65%',
-      style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
+    return Container(
+      padding: const EdgeInsets.only(top: 2, left: 2),
+      child: const Text(
+        '65%',
+        style: TextStyle(
+            fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white60),
+      ),
     );
   }
 
-  signal() {
-    return const Icon(Icons.signal_cellular_0_bar_rounded, size: 11);
+  Widget signal() {
+    return const Icon(Icons.signal_cellular_0_bar_rounded,
+        size: 10, color: Colors.white60);
   }
 }

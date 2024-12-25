@@ -16,7 +16,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        fontFamily: 'SamsungOne',
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          bodyMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+          bodySmall: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+        ),
+      ),
       home: const ResponsiveLayout(
         mobileBody: MobileScaffold(),
         tabletBody: TabletScaffold(),
