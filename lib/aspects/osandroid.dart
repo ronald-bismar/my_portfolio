@@ -35,36 +35,38 @@ class _ScreenMainAndroidState extends State<ScreenMainAndroid> {
 
   Widget mainScreen() {
     return Expanded(
-      child: SizedBox(
+      child: Container(
+        margin: const EdgeInsets.only(top: 10),
         width: double.infinity,
         child: GridView.builder(
           padding: const EdgeInsets.all(8.0),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4, // Número de columnas
             mainAxisSpacing: 30.0, // Espacio vertical entre las grillas
-            crossAxisSpacing: 20.0, // Espacio horizontal entre las grillas
             mainAxisExtent: 80, // Altura de cada celda
           ),
           itemCount: 10, // Número de elementos en la grilla
           itemBuilder: (context, index) {
             return Container(
+              padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
               child: Column(
                 children: [
                   Container(
-                    height: 50, // Ajusta la altura según sea necesario
-                    width: 50,
+                    height: 40, // Ajusta la altura según sea necesario
+                    width: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.blueAccent,
                     ),
                   ),
+                  const SizedBox(height: 5),
                   Center(
                     child: Text(
                       'Item $index',
-                      style: const TextStyle(color: Colors.black, fontSize: 12),
+                      style: const TextStyle(color: Colors.black, fontSize: 10),
                     ),
                   ),
                 ],
